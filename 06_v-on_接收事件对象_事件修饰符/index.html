@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06_v-on_接收事件对象_事件修饰符</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
+<body>
+    <div id="test">
+        <br/>
+        <h2>传参的同时，接收事件对象</h2>
+            <button @click="test('111', $event)">哈哈</button>
+        <hr/>
+        <h2>事件修饰符.prevent - 阻止事件的默认行为</h2>
+            <a href="https://www.baidu.com" @click.prevent="jumpFunc">百度</a>
+        <hr/>
+        <h2>事件修饰符.stop - 停止事件冒泡</h2>
+            <div @click="outerFunc" style="width: 200px;height: 200px; background-color: #fdb654;">
+                <div @click.stop="innerFunc" style="width: 100px;height: 100px; background-color: rosybrown;"></div>
+            </div>
+        <hr/>
+        <h2>事件修饰符 - 按键修饰符</h2>
+            <label>
+                <input type="text" @keyup.enter="enterFunc"/>
+            </label>
+            <label>
+                <input type="text" @keyup.65="aFunc"/>
+            </label>监视了 A 键
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+        new Vue({
+            el: "#test",
+            methods:{
+                test(something, e){
+                    alert(something, e)
+                },
+                jumpFunc(){
+                    alert("去百度")
+                },
+                innerFunc(){
+                    alert("innerFunc")
+                },
+                outerFunc(){
+                    alert("outerFunc")
+                },
+                enterFunc(e){
+                    alert(e.target.value)
+                },
+                aFunc(e){
+                    alert(e.target.value)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

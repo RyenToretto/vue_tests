@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for_遍历数组、遍历对象</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
+<body>
+    <div id="test">
+        <br/>
+        <h2>遍历数组</h2>
+        <h3>变异方法：vue 监测数组的相关方法
+        重写 push/pop/splice/sort/reverse/shift/unshift 增加了界面更新</h3>
+        <ul>
+            <li v-for="(p, index) in persons" :key="index">
+                {{p.name}}
+                {{p.age}}
+                <button @click="deleteP(idnex)">删除</button>
+                <button @click="updateP(index, {name: 'kjf', age:18})">更新</button>
+            </li>
+        </ul>
+        <hr/>
+        <h2>遍历对象</h2>
+        <ul>
+            <li v-for="(value, key) in persons[1]" :key="key">
+                {{key}}----{{value}}
+            </li>
+        </ul>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+        new Vue({
+            el: "#test",
+            data:{
+                persons:[
+                    {name: "Tom", age: 14},
+                    {name: "Jack", age: 17},
+                    {name: "Rose", age: 15},
+                    {name: "Jerry", age: 18},
+                    {name: "Kate", age: 16}
+                ]
+            },
+            methods:{
+                deleteP(index){
+                    this.persons.splice(index, 1)
+                },
+                updateP(index, newP){
+                    this.persons.splice(index, 1, newP)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染 v-if、v-else 和 v-show</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
+<body>
+    <div id="test">
+        <hr />
+        v-if 的原理：元素的删除再创建
+        <p v-if="ok">表白成功</p>
+        <p v-else>表白失败</p>
+        <hr/>
+        v-show 的原理： display 的切换
+        <p v-show="sayYes">求婚成功</p>
+        <p v-show="!sayYes">求婚失败</p>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#test",
+            data(){
+                return {
+                    ok: true,
+                    sayYes: false
+                }
+            }
+        })
+    </script>
+</body>
+</html>

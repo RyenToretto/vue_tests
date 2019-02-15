@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>07_ form 表单的自动数据收集</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
+<body>
+    <div id="test">
+        <form action="javascript:">
+            <label>
+                <span>用户名： </span>
+                <input v-model="user.name" type="text" />
+            </label><br/><br/><br/>
+            
+            <label>
+                <span>密码： </span>
+                <input v-model="user.password" type="password" />
+            </label><br/><br/><br/>
+            
+            <span>性别： </span>
+            <label>男
+                <input v-model="user.gender" name="gender" type="radio" value="boy"/>
+            </label>
+            <label>女
+                <input v-model="user.gender" name="gender" type="radio" value="girl"/>
+            </label><br/><br/><br/>
+            
+            <span>爱好： </span>
+            <label>跳水
+                <input v-model="user.hobby" name="jumpWater" type="checkbox" value="跳水"/>
+            </label>
+            <label>滑翔
+                <input v-model="user.hobby" name="fly" type="checkbox" value="滑翔"/>
+            </label>
+            <label>蹦极
+                <input v-model="user.hobby" name="jumpHeight" type="checkbox" value="蹦极"/>
+            </label><br/><br/><br/>
+            
+            <span>城市： </span>
+            <select v-model="user.city">
+                <option value="BJ">北京</option>
+                <option value="HN">湖南</option>
+                <option value="SZ">深圳</option>
+                <option value="ZJ">浙江</option>
+            </select><br/><br/><br/>
+            
+            <label>
+                <span>介绍： </span>
+                <textarea v-model="user.words" cols="30" rows="2"></textarea>
+            </label><br/><br/><br/>
+            
+            <label>
+                <input @click="register" type="submit" value="注册" />
+            </label>
+            
+        </form>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+        new Vue({
+            el: "#test",
+            data:{
+                user:{
+                    name: "admin",
+                    gender: "boy",
+                    hobby: ["跳水"],
+                    city: "HN"
+                }
+            },
+            methods:{
+                register(){
+                    console.log(this.user)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

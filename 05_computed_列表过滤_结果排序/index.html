@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class 绑定 和 style 绑定</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
+<body>
+    <div id="test">
+        <label>
+            <input type="text" v-model="searchWord" placeholder="搜索一下"/>
+        </label>
+        <button type="button" @click="orderType=1">原来排序</button>
+        <button type="button" @click="orderType=2">升序排序</button>
+        <button type="button" @click="orderType=3">降序排序</button>
+        
+        <ul>
+            <li v-for="(p, index) in searchResult">
+                {{p.name}}----{{p.age}}
+            </li>
+        </ul>
+        
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#test",
+            data(){
+                return {
+                    persons:[
+                        {name:"Tom", age:18},
+                        {name:"Jack", age:16},
+                        {name:"Jerry", age:14},
+                        {name:"Kate", age:17},
+                        {name:"Lee", age:14}
+                    ],
+                    searchWord: "",
+                    orderType: 1
+                }
+            },
+            computed:{
+                searchResult(){
+                    const {orderType, searchWord, persons} = this;
+                    
+                    let result = persons.filter(person=>{
+                        return (person.name.indexOf(searchWord)!==-1) ||
+                                (person.age === +searchWord)
+                    });
+                    
+                    if(orderType !== 1){
+                        result.sort((one, two)=>{
+                            if(orderType === 2){
+                                return one.age - two.age
+                            }else if(orderType === 3){
+                                return two.age - one.age
+                            }
+                        })
+                    }
+                    
+                    return result;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

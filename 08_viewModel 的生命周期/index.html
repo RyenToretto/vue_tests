@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>viewModel 的生命周期</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
+<body>
+    <div id="test">
+        <button type="button" @click="destroyVue">卸载 viewModel</button>
+        <p v-show="isShow">生当作人杰，死亦为鬼雄。</p>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+        new Vue({
+            el: "#test",
+            data:{
+                isShow: true
+            },
+            methods:{
+                destroyVue(){
+                    this.$destroy();
+                }
+            },
+            mounted(){    // 初始显示之后立即执行: 执行异步任务
+                this.timerId = window.setInterval(()=>{
+                    console.log("27 ---- mounted");
+                    this.isShow = !this.isShow
+                }, 1000)
+            },
+            beforeDestroy(){
+                console.log("32 ---- beforeDestroy");
+                window.clearInterval(this.timerId)
+            },
+            /***************************************************/
+            beforeCreate(){
+                console.log("36      beforeCreate")
+            },
+            created(){
+                console.log("40      createdcreated")
+            },
+            beforeMount(){
+                console.log("42      beforeMount")
+            },
+            beforeUpdate(){
+                console.log("46      beforeUpdate")
+            },
+            updated(){
+                console.log("49      updated")
+            },
+            destroyed(){
+                console.log("52      destoryed")
+            }
+        })
+    </script>
+</body>
+</html>

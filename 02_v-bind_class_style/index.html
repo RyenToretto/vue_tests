@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class 绑定 和 style 绑定</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
+<body>
+    <div id="test">
+        <p class="a_class" :class="myClass">字符串模式 - class 名 不确定</p>
+        <p :class="{'a_class': hasA, 'b_class': hasB}">对象模式 - class 名 确定，但是不确定是否显示</p>
+        <p :class="['a_class', 'b_class']">数组模式 - 多个动态 class</p>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#test",
+            data(){
+                return {
+                    myClass: "b_class",
+                    hasA: true,
+                    hasB: false
+                }
+            }
+        })
+    </script>
+</body>
+</html>
