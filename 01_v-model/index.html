@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-model 指令</title>
+</head>
+<body>
+    <div id="test">
+        <h2>核心原理 Object.defineProperty(ele, "aProperty", function(){})</h2>
+        <label> <input type="text" v-model="myVueDate"/>
+            <input type="text" v-model="myUrl"/>
+        </label>
+        <a :href="myUrl" target="_blank"><button type="button">跳转</button></a><br/><br/><br/>
+        <label>普通属性的 监视属性 - 单向数据绑定 :
+            <input type="text" v-model="myListener"/>
+        </label><br/><br/><br/>
+        <label>计算属性 - 双向数据绑定 :
+            <input type="text" v-model="myResult"/>
+        </label><br/><br/><br/>
+        <button type="button" @click="toHao" >事件绑定 - 跳转到 hao123</button>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#test",
+            data(){
+                return {
+                    myVueDate: "kjf",
+                    myUrl: "https://www.baidu.com",
+                    myListener: "kjf-https://www.baidu.com",
+                    haoUrl: "https://www.hao123.com"
+                }
+            },
+            watch:{
+                myVueDate(newValue){
+                    this.myListener = newValue + "-" + this.myUrl
+                },
+                myUrl(newValue){
+                    this.myListener = myVueDate + "-" + newValue
+                }
+            },
+            computed: {
+                myResult:{
+                    get(){
+                        return this.myVueDate + "-" +  this.myUrl
+                    },
+                    set(newValue){
+                        let names = newValue.split("-");
+                        this.myVueDate = names[0];
+                        this.myUrl = names[1];
+                    }
+                }
+            },
+            methods:{
+                toHao(){
+                    window.open(this.haoUrl);    // 在新标签页打开
+                }
+            }
+        })
+    </script>
+</body>
+</html>
