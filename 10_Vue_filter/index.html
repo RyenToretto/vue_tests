@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>10_Vue_filter</title>
+        <link rel="stylesheet" type="text/css" href="./css/index.css">
+    </head>
+    <body>
+        <div id="test">
+            <p>{{curTime | timeFormat}}</p>
+        </div>
+        <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.js"></script>
+        <script src="./js/vue.js"></script>
+        <script>
+            Vue.filter("timeFormat", function (value, timeType="YYYY-MM-DD HH:mm:ss") {
+                let newValue = moment(value).format(timeType);
+                return (newValue === "Invalid date")?"":newValue;
+            });
+            new Vue({
+                el: "#test",
+                data:{
+                    curTime: ""
+                },
+                mounted(){
+                    setInterval(()=>{
+                        this.curTime = Date.now();
+                    }, 1000)
+                }
+            });
+        </script>
+    </body>
+</html>

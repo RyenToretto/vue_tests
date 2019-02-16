@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>vue 过渡、动画 - 原理： 操作 css 类名</title>
+        <link rel="stylesheet" type="text/css" href="./css/index.css">
+        <style>
+            .xxxx-enter-active,        /* 显示过渡 */
+            .xxxx-leave-active {        /*隐藏过渡 */
+                transition: all 1s;
+            }
+            
+            /* 指定隐藏时 的样式 */
+            .xxxx-enter,        /* 显示开始时 的样式 */
+            .xxxx-leave-to {        /* 隐藏结束时 的样式 */
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            /*-----------------------------------------*/
+            .dada-enter-active {
+                animation: 1s dada;
+            }
+            .dada-leave-active {
+                animation: 2s dada reverse;
+            }
+            @keyframes dada {
+                0% {
+                    transform: translateX(40px);
+                }
+                50% {
+                    transform: translateX(80px);
+                }
+                100% {
+                    transform: translateX(0px);
+                }
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div id="test">
+            <button @click="isShow=!isShow">切换</button>
+    
+            <transition name="dada">
+                <p v-show="isShow">大大</p>
+            </transition>
+            <br />
+            <transition name="xxxx">
+                <p v-show="isShow">哈哈</p>
+            </transition>
+        </div>
+        <script src="./js/vue.js"></script>
+        <script>
+            new Vue({
+                el: "#test",
+                data:{
+                    isShow: true
+                },
+                methods:{
+                
+                }
+            })
+        </script>
+    </body>
+</html>
